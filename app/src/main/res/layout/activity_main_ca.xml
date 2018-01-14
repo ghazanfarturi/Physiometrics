@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Demo.MainActivityCA">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="40dp"
+            android:contentDescription="@string/titleImageMissing"
+            android:src="@drawable/title" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutExperiment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewExperiment"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:contentDescription="@string/imageMissing"
+                android:src="@drawable/experimentnotice1" />
+
+            <Switch
+                android:id="@+id/switchExperiment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:checked="true" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frameMain"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:id="@+id/layoutIdentification"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/layoutBuild"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageBuild"
+                        android:layout_width="200dp"
+                        android:layout_height="35dp"
+                        android:contentDescription="@string/imageMissing"
+                        android:src="@drawable/trainmodels" />
+
+                    <Switch
+                        android:id="@+id/switchBuild"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:checked="true" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/layoutBuildFrame"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <LinearLayout
+                        android:id="@+id/layoutBuildModels"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:id="@+id/layoutBuildTotalTime"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageBuildTotalTime"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:layout_marginTop="0dp"
+                                android:contentDescription="@string/imageMissing"
+                                android:src="@drawable/total" />
+
+                            <EditText
+                                android:id="@+id/editBuildTotalTime"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:gravity="bottom|center"
+                                android:inputType="number|numberSigned|numberDecimal"
+                                android:onClick="onEditBuildTotalTimeClick"
+                                android:text="@string/editTextTotalTime"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutBuildWindowTime"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageBuildWindowTime"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:layout_marginTop="0dp"
+                                android:contentDescription="@string/imageMissing"
+                                android:src="@drawable/window" />
+
+                            <EditText
+                                android:id="@+id/editBuildWindowTime"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:gravity="bottom|center"
+                                android:inputType="number|numberSigned|numberDecimal"
+                                android:onClick="onEditBuildWindowTimeClick"
+                                android:text="@string/editTextWindowTime"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutBuildCentroids"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageBuildCentroids"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:layout_marginTop="0dp"
+                                android:contentDescription="@string/imageMissing"
+                                android:src="@drawable/centroids" />
+
+                            <EditText
+                                android:id="@+id/editBuildCentroids"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:gravity="bottom|center"
+                                android:inputType="number|numberSigned|numberDecimal"
+                                android:onClick="onEditBuildCentroidsClick"
+                                android:text="@string/editTextNumberOfCentroids"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutBuildGroup"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageBuildGroup"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:layout_marginTop="0dp"
+                                android:contentDescription="@string/imageMissing"
+                                android:src="@drawable/group" />
+
+                            <Spinner
+                                android:id="@+id/spinnerBuildGroup"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:entries="@array/Groups"
+                                android:gravity="center"></Spinner>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutBuildNewData"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageBuildNewData"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:layout_marginTop="0dp"
+                                android:contentDescription="@string/imageMissing"
+                                android:src="@drawable/newdata" />
+
+                            <CheckBox
+                                android:id="@+id/checkBuildNewData"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:checked="true" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutButtons"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center">
+
+                            <Button
+                                android:id="@+id/buttonStart"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:onClick="onButtonStartClick"
+                                android:text="@string/buttonStart"
+                                android:textAllCaps="false"
+                                tools:ignore="ButtonStyle" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutTestModels"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="45dp"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+                        <LinearLayout
+                            android:id="@+id/layoutTestTotalTime"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageTestTotalTime"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:layout_marginTop="0dp"
+                                android:contentDescription="@string/imageMissing"
+                                android:src="@drawable/total" />
+
+                            <EditText
+                                android:id="@+id/editTestTotalTime"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:gravity="bottom|center"
+                                android:inputType="number|numberSigned|numberDecimal"
+                                android:onClick="onEditBuildTotalTimeClick"
+                                android:text="@string/editTextTotalTime"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutTestNewData"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageTestNewData"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:layout_marginTop="0dp"
+                                android:contentDescription="@string/imageMissing"
+                                android:src="@drawable/newdata" />
+
+                            <CheckBox
+                                android:id="@+id/checkTestNewData"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:checked="true" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/buttonClaTestStart"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:onClick="onButtonClaTestStartClick"
+                            android:text="@string/buttonClaTestStart" />
+
+                        <TextView
+                            android:id="@+id/textClaTestResult"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:gravity="center"
+                            android:scrollbars="vertical"
+                            android:text="@string/textClaTestResult"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutAuthentication"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <LinearLayout
+                    android:id="@+id/layoutAuthTraining"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageAuthTest"
+                        android:layout_width="200dp"
+                        android:layout_height="35dp"
+                        android:contentDescription="@string/imageMissing"
+                        android:src="@drawable/trainmodel" />
+
+                    <Switch
+                        android:id="@+id/switchAuthTest"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:checked="false" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutAuthButtons"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/buttonAuthStart"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="onButtonAuthStartClick"
+                        android:text="@string/buttonAuthStart" />
+
+                    <Button
+                        android:id="@+id/buttonAuthStop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:onClick="onButtonAuthStopClick"
+                        android:text="@string/buttonAuthStop" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
