@@ -47,11 +47,9 @@ public class SensorDataCollectingService extends Service implements SensorEventL
     private int groupCount = 0;
 
     public SensorDataCollectingService() {
-
     }
 
     public static void collect() {
-
     }
 
     @Override
@@ -186,7 +184,6 @@ public class SensorDataCollectingService extends Service implements SensorEventL
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     private void saveRawFile(final Long currentTime,

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.view.accessibility.AccessibilityManager;
 
 import de.unikl.hci.abbas.physiometrics.R;
 import de.unikl.hci.abbas.physiometrics.Demo.MainActivity;
@@ -25,16 +26,16 @@ import java.io.InputStreamReader;
 public class TouchDataCollectingService extends Service {
     // Get External Storage Directory & the filename of raw data and features
     public final String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Auth/Touch/";
-    public final String rawFilename = dir + "/touch.txt";
-    public final String clickFeatureFilename = dir + "/click_features.txt";
-    public final String slideFeatureFilename = dir + "/slide_features.txt";
+    public final String rawFilename = dir + "touch.txt";
+    public final String clickFeatureFilename = dir + "click_features.txt";
+    public final String slideFeatureFilename = dir + "slide_features.txt";
 
     public TouchDataCollectingService() {
     }
 
     public static void collect(PostEventMethod postEvent) {
         try {
-            // Kill the previous getevent process
+            // Kill the previous getEvent process
             try {
                 String[] cmd = {
                         "/system/bin/sh",
@@ -46,9 +47,9 @@ public class TouchDataCollectingService extends Service {
                 e.printStackTrace();
             }
 
-
             // Start Collection
-            String[] cmd = {"su", "-c", "getevent -t /dev/input/event5"};
+            //String[] cmd = {"su", "-c", "getevent -t /dev/input/event5"};
+            String[] cmd = {"su", "-c", " | getevent -t /Phone/Auth/Touch"};
             Process p = Runtime.getRuntime().exec(cmd);
             InputStream is = p.getInputStream();
 
@@ -143,6 +144,14 @@ public class TouchDataCollectingService extends Service {
 
         TouchEvent event;
         StringBuilder sb;
+
+        private TouchEvent getEvent() {
+            return event;
+        }
+
+        private StringBuilder getSb() {
+            return sb;
+        }
 
         void setParam(TouchEvent event, StringBuilder sb) {
             this.event = event;

@@ -219,7 +219,6 @@ public class DataService extends IntentService implements SensorEventListener {
             fileNameMagNow = rootPath + "Magnetic/" + System.currentTimeMillis() + ".txt";
             fileNameGyrNow = rootPath + "Gyroscope/" + System.currentTimeMillis() + ".txt";
 
-
             fileNameFeatureVectors = rootPath + "FeatureVectors.txt";
             fileNameCentroids = rootPath + "Centroids.txt";
             fileNameModels = rootPath + "model.txt";

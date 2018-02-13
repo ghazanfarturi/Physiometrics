@@ -34,10 +34,8 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
             }, 1);
-
             return false;
         }
-
         return false;
     }
 
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         FileUtils.makeRootDirectory(dir + "/Auth/Touch/");
         FileUtils.makeRootDirectory(dir + "/Auth/Sensor/");
 
-
         isGrantExternalRW(this);
     }
 
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             stopService(new Intent(this, TouchPredictingService.class));
-            stopService(new Intent(this, SensorDataCollectingService.class));
+            stopService(new Intent(this, SensorPredictingService.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,13 +95,11 @@ public class MainActivity extends AppCompatActivity {
         slideFeatures = DataUtils.cleanData(slideFeatures, true);
         slideFeatures = DataUtils.scaleData(slideFeatures, dir + "Touch/slide_coefs.txt", false);
 
-
         clickModel = new SVM();
         clickModel.train(clickFeatures, clickLabel);
 
         slideModel = new SVM();
         slideModel.train(slideFeatures, slideLabel);
-
 
         String trainFvFilename = dir + "Sensor/FeatureVectors.txt";
         String modelFilename = dir + "Sensor/Model.txt";
@@ -115,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
         model.saveModel(modelFilename);
         model.saveCentroids(centroidsFilename);
-
 
         Toast.makeText(this, "Training End!", Toast.LENGTH_SHORT).show();
     }

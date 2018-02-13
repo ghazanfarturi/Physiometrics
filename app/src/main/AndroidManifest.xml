@@ -14,18 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--
+
         <activity android:name=".Demo.MainActivity">
-            &lt;!&ndash;
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            &ndash;&gt;
-        </activity>
-        -->
 
+        </activity>
+
+        <!--
         <activity android:name=".Demo.MainActivityCA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,8 +34,8 @@
             </intent-filter>
         </activity>
 
-        <!--
         <activity android:name=".ContinuousAuth.Activity.AuthenticationActivity"></activity>
+        -->
 
         <service
             android:name=".TouchAuth.Service.TouchDataCollectingService"
@@ -51,13 +51,18 @@
             android:name=".TouchAuth.Service.SensorDataCollectingService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".TouchAuth.Service.SensorPredictingService"
+            android:enabled="true"
+            android:exported="true" />
 
         <service
             android:name=".TouchAuth.Service.AuthService"
             android:enabled="true"
             android:exported="true" />
-        -->
 
+
+        <!--
         <service android:name=".ContinuousAuth.Service.DataService">
             <intent-filter android:priority="1000">
                 <action android:name="de.unikl.hci.abbas.physiometrics.ContinuousAuth.Service" />
@@ -70,6 +75,8 @@
         </service>
 
         <activity android:name=".Demo.StartActivity"></activity>
+        -->
+
     </application>
 
 </manifest>
