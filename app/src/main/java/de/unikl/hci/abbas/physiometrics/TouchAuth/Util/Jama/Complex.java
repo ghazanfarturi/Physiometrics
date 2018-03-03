@@ -45,6 +45,24 @@ public class Complex {
         return sum;
     }
 
+    // circ_r computation. Translated from www.kyb.mpg.de/~berens/circStat.html
+    public static double circ_r(double[] arr) {
+        Complex temp = new Complex(0, 1);
+        Complex c = temp.times(arr[0]).exp();
+        for (int i = 1; i < arr.length; i++)
+            c.plus(temp.times(arr[i]).exp());
+        return c.abs() / arr.length;
+    }
+
+    // circ_mean computation. Translated from www.kyb.mpg.de/~berens/circStat.html
+    public static double circ_mean(double[] arr) {
+        Complex temp = new Complex(0, 1);
+        Complex c = temp.times(arr[0]).exp();
+        for (int i = 1; i < arr.length; i++)
+            c.plus(temp.times(arr[i]).exp());
+        return Math.atan2(c.im(), c.re());
+    }
+
     // return a string representation of the invoking object
     public String toString() {
         return re + ((im >= 0) ? "+" : "") + im + "i";
@@ -61,6 +79,26 @@ public class Complex {
 
     public double power() {
         return re * re + im * im;
+    }
+
+    // return a new Complex object whose value is the complex exponential of this
+    public Complex exp() {
+        return new Complex(Math.exp(re) * Math.cos(im), Math.exp(re) * Math.sin(im));
+    }
+
+    // return a new Complex object whose value is the complex sine of this
+    public Complex sin() {
+        return new Complex(Math.sin(re) * Math.cosh(im), Math.cos(re) * Math.sinh(im));
+    }
+
+    // return a new Complex object whose value is the complex cosine of this
+    public Complex cos() {
+        return new Complex(Math.cos(re) * Math.cosh(im), -Math.sin(re) * Math.sinh(im));
+    }
+
+    // return a new Complex object whose value is the complex tangent of this
+    public Complex tan() {
+        return sin().divides(cos());
     }
 
     // return a new object whose value is (this + b)
@@ -90,6 +128,11 @@ public class Complex {
         return prod;
     }
 
+    // return a new object whose value is (this * alpha)
+    public Complex times(double alpha) {
+        return new Complex(alpha * re, alpha * im);
+    }
+
     // return a new object whose value is the conjugate of this
     public Complex conjugate() {
         return new Complex(re, -im);
@@ -105,12 +148,21 @@ public class Complex {
         return Math.sqrt(re * re + im * im);
     }
 
+    // return the real part of this ComplexNumber
+    public double re() {
+        return re;
+    }
+
+    // return the imaginary part of this ComplexNumber
+    public double im() {
+        return im;
+    }
+
     // return a / b
     public Complex divides(Complex b) {
         Complex a = this;
         return a.times(b.reciprocal());
     }
-
 
     /*
     // sample client for testing

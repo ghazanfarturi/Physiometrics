@@ -1,6 +1,6 @@
 package de.unikl.hci.abbas.physiometrics.Demo;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.Manifest;
 import android.app.Activity;
@@ -8,8 +8,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import java.io.DataOutputStream;
 
 import de.unikl.hci.abbas.physiometrics.R;
 import de.unikl.hci.abbas.physiometrics.TouchAuth.MLModel.NGramModel;
@@ -32,11 +36,38 @@ public class MainActivity extends AppCompatActivity {
 
             activity.requestPermissions(new String[]{
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS
             }, 1);
             return false;
         }
         return false;
+    }
+
+    public static boolean RootCommand(String command) {
+        Process process = null;
+        DataOutputStream os = null;
+        try {
+            process = Runtime.getRuntime().exec("su");
+            os = new DataOutputStream(process.getOutputStream());
+            os.writeBytes(command + "\n");
+            os.writeBytes("exit\n");
+            os.flush();
+            process.waitFor();
+        } catch (Exception e) {
+            Log.d("*** DEBUG ***", "ROOT REE" + e.getMessage());
+            return false;
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+                process.destroy();
+            } catch (Exception e) {
+            }
+        }
+        Log.d("*** DEBUG ***", "Root SUC ");
+        return true;
     }
 
     @Override
@@ -53,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCollectStartButtonClick(View view) {
-
         try {
             stopService(new Intent(this, TouchPredictingService.class));
             stopService(new Intent(this, SensorPredictingService.class));

@@ -56,11 +56,9 @@ public class SensorPredictingService extends Service implements SensorEventListe
     private int groupCount = 0;
 
     public SensorPredictingService() {
-
     }
 
     public static void collect() {
-
     }
 
     @Override
@@ -80,7 +78,6 @@ public class SensorPredictingService extends Service implements SensorEventListe
                 double[][] fv = FileUtils.readFileToMatrix(trainFvFilename);
                 model = new NGramModel(NUM_OF_CENTROIDS, NUM_OF_N);
                 model.train(fv);
-
                 model.saveModel(modelFilename);
                 model.saveCentroids(centroidsFilename);
             }
@@ -212,7 +209,6 @@ public class SensorPredictingService extends Service implements SensorEventListe
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     private void saveRawFile(final Long currentTime,

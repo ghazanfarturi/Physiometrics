@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TouchEvent {
+
     private final static String prevPatternString
             = "\\[\\s*(\\d+\\.\\d+)\\]\\s(0003)\\s(003a)\\s([0-9a-z]{8})\\s"
             + "\\[\\s*(\\d+\\.\\d+)\\]\\s(0003)\\s(0035)\\s([0-9a-z]{8})\\s"

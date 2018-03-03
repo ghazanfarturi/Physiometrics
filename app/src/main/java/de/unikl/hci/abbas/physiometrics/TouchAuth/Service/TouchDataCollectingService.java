@@ -7,19 +7,33 @@ package de.unikl.hci.abbas.physiometrics.TouchAuth.Service;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.bluetooth.BluetoothProfile;
 import android.content.Intent;
 import android.os.Environment;
 import android.os.IBinder;
+import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.view.accessibility.AccessibilityManager;
+import android.view.MotionEvent;
+import android.view.View;
+import android.app.Service;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
+import android.os.IBinder;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View.OnTouchListener;
 
 import de.unikl.hci.abbas.physiometrics.R;
 import de.unikl.hci.abbas.physiometrics.Demo.MainActivity;
+import de.unikl.hci.abbas.physiometrics.TouchAuth.MLModel.TouchAuth;
 import de.unikl.hci.abbas.physiometrics.TouchAuth.MLModel.TouchFeatureExtraction;
 import de.unikl.hci.abbas.physiometrics.TouchAuth.MLModel.TouchEvent;
 import de.unikl.hci.abbas.physiometrics.TouchAuth.Util.FileUtils;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -29,6 +43,7 @@ public class TouchDataCollectingService extends Service {
     public final String rawFilename = dir + "touch.txt";
     public final String clickFeatureFilename = dir + "click_features.txt";
     public final String slideFeatureFilename = dir + "slide_features.txt";
+    protected FileUtils fileUtils;
 
     public TouchDataCollectingService() {
     }
@@ -46,36 +61,31 @@ public class TouchDataCollectingService extends Service {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             // Start Collection
-            //String[] cmd = {"su", "-c", "getevent -t /dev/input/event5"};
-            String[] cmd = {"su", "-c", " | getevent -t /Phone/Auth/Touch"};
+            String[] cmd = {"su", "-c", "getevent -t /dev/input/event5"};
+            //String[] cmd = {"su chmod 666 /dev/input/event5", "su -c getevent -t /dev/input/event5"};
+            //String[] cmd = {"/system/bin/sh", "-c", "ps | getevent -t /storage/emulated/0/Auth/Touch"};
+
             Process p = Runtime.getRuntime().exec(cmd);
             InputStream is = p.getInputStream();
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
+            String s;
             int i = 0;
             StringBuilder sb = new StringBuilder();
-            while (true) {
+            while (((s = reader.readLine()) != null)) {
                 String line = reader.readLine();
                 sb.append(line).append("\n");
                 ++i;
                 if (i >= 10) {
-
                     TouchEvent event = TouchEvent.getTouchEventFromString(sb.toString());
                     if (event != null) {
-
                         postEvent.setParam(event, sb);
                         postEvent.call();
-
                         sb.delete(event.start, event.end);
                         i -= 10;
-
                     }
                 }
             }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
             collect(postEvent);
@@ -85,17 +95,23 @@ public class TouchDataCollectingService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        /*
+        String[] commands = new String[8];
+        for (int i = 0; i < commands.length; i++) {
+            commands[i] = "chmod 777 /dev/input/event" + i + "\n";
+        }
+        fileUtils.rootPermission(commands);
+        */
         improvePriority();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
-
                 collect(new PostEventMethod() {
+
                     @Override
                     public Void call() throws Exception {
                         double[] features = TouchFeatureExtraction.extract(this.event);
@@ -109,7 +125,6 @@ public class TouchDataCollectingService extends Service {
                         return null;
                     }
                 });
-
             }
         }).start();
 
